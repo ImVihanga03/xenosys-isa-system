@@ -1,16 +1,11 @@
-const API_BASE = 'http://localhost:5000/api';
-
-export async function getMyCompliance() {
-  const res = await fetch(`${API_BASE}/compliance/me`);
-  return res.json();
-}
-
-export async function getComplianceOverview() {
-  const res = await fetch(`${API_BASE}/compliance/overview`);
-  return res.json();
-}
-
-export async function getPendingCompliance() {
-  const res = await fetch(`${API_BASE}/compliance/pending`);
-  return res.json();
+export async function api(path, { method = 'GET', body } = {}) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${path}`, {
+    method, credentials: 'include',
+    headers: body ? { 'Content-Type': 'application/json' } : undefined,
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw Object.assign(new Error(data.message || 'Request failed'),
+                                   { status: res.status, code: data.code, data });
+  return data;
 }
