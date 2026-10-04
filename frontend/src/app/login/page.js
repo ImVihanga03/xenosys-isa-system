@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import AuthCardShell from '@/components/AuthCardShell';
 import { IconInput, PasswordInput, UserIcon } from '@/components/AuthFields';
@@ -46,6 +47,11 @@ export default function LoginPage() {
 
         <PasswordInput
           label="Password"
+          labelAction={
+            <Link href="/forgot-password" className="text-sm font-medium text-blue-700 hover:text-blue-900 hover:underline">
+              Forgot password?
+            </Link>
+          }
           required
           autoComplete="current-password"
           placeholder="Enter your password"

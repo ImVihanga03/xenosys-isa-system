@@ -13,4 +13,17 @@ module.exports = {
   cookieSecure: process.env.COOKIE_SECURE === 'true',
   maxAttempts: +process.env.LOGIN_MAX_ATTEMPTS || 5,
   lockMinutes: +process.env.LOCK_MINUTES || 15,
+
+  resetCodeMinutes: +process.env.RESET_CODE_MINUTES || 10,
+  resetMaxAttempts: +process.env.RESET_MAX_ATTEMPTS || 5,
+  resetSessionMinutes: +process.env.RESET_SESSION_MINUTES || 10,
+  resendCooldownSeconds: +process.env.RESET_RESEND_COOLDOWN_SECONDS || 60,
+  resetMaxPerHour: +process.env.RESET_MAX_PER_HOUR || 5,
+  smtp: {
+    host: process.env.SMTP_HOST,
+    port: +process.env.SMTP_PORT || 587,
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+    from: process.env.MAIL_FROM || 'Xenosys Security <no-reply@xenosys.lk>',
+  },
 };

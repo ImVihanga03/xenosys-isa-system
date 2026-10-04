@@ -13,3 +13,14 @@ exports.createUserSchema = z.object({
   department: z.string().trim().max(100).optional(),
   jobRole: z.string().trim().max(100).optional(),
 });
+
+
+const code = z.string().trim().regex(/^\d{6}$/, 'Enter the 6-digit code');
+
+exports.forgotPasswordSchema = z.object({ email });
+exports.verifyCodeSchema = z.object({ email, code });
+exports.resetPasswordSchema = z.object({
+  newPassword: z.string().min(1).max(128),
+  confirmPassword: z.string().min(1).max(128),
+}).refine(d => d.newPassword === d.confirmPassword,
+  { message: 'Passwords do not match', path: ['confirmPassword'] });
