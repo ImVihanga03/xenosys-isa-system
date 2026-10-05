@@ -16,8 +16,7 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 app.use('/api/auth', require('./modules/auth/auth.routes'));
 app.use('/api/admin/users', require('./modules/admin/users.routes'));
 app.use('/api/compliance', require('./modules/compliance/compliance.routes'));
-// Teammates add their router here, e.g.:
-// app.use('/api/policies', require('./modules/policy/policy.routes'));
+app.use('/api/policies', require('./modules/policy/policy.routes'));
 
 app.use((req, res) => res.status(404).json({ message: 'Not found' }));
 app.use(errorHandler);

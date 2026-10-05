@@ -38,6 +38,15 @@ export default function AppShell({ children }) {
                 Dashboard
               </Link>
 
+              {!isComplianceUser && (
+                <Link
+                  href="/policies"
+                  className="text-sm font-medium text-slate-600 hover:text-blue-700"
+                >
+                  Policies
+                </Link>
+              )}
+
               <Link
                 href="/training"
                 className="text-sm font-medium text-slate-600 hover:text-blue-700"

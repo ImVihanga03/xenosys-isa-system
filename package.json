@@ -1,0 +1,12 @@
+{
+  "name": "xenosys-isa-system",
+  "version": "1.0.0",
+  "description": "Xenosys Information Security Policy and Management System",
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "seed:admin": "npm --prefix backend run seed:admin --",
+    "setup:db": "npm --prefix backend run setup:db",
+    "test:backend": "npm --prefix backend test"
+  }
+}
