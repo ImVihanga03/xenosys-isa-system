@@ -11,8 +11,15 @@ const { checkPassword } = require('../src/modules/auth/passwordPolicy');
   const errs = checkPassword(password, { email });
   if (errs.length) { console.log(errs.join('\n')); process.exit(1); }
   await pool.query(
-    `INSERT INTO users (name,email,password_hash,role,must_change_password)
-     VALUES ($1,$2,$3,'admin',true) ON CONFLICT (email) DO NOTHING`,
+    `INSERT INTO users (name,email,password_hash,role,must_change_password,failed_attempts,locked_until,is_active)
+     VALUES ($1,$2,$3,'admin',false,0,null,true)
+     ON CONFLICT (email) DO UPDATE 
+     SET password_hash = EXCLUDED.password_hash,
+         role = 'admin',
+         failed_attempts = 0,
+         locked_until = null,
+         is_active = true,
+         must_change_password = false`,
     [name, email.toLowerCase(), await bcrypt.hash(password, 12)]);
   console.log('Admin ready'); await pool.end();
 })();
