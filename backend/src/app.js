@@ -17,6 +17,7 @@ app.use('/api/auth', require('./modules/auth/auth.routes'));
 app.use('/api/admin/users', require('./modules/admin/users.routes'));
 app.use('/api/compliance', require('./modules/compliance/compliance.routes'));
 app.use('/api/policies', require('./modules/policy/policy.routes'));
+app.use('/api/training', require('./modules/training/training.routes'));
 
 app.use((req, res) => res.status(404).json({ message: 'Not found' }));
 app.use(errorHandler);
