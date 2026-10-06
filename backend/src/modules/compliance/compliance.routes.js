@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const complianceController = require('./compliance.controller');
+const { authenticate } = require('../../shared/middleware/authenticate');
 
-// Employee - own compliance status
+router.use(authenticate);
+
 router.get('/me', complianceController.getMyCompliance);
-
-// Admin - overall compliance
 router.get('/overview', complianceController.getOverview);
-
-// Admin - pending list
 router.get('/pending', complianceController.getPending);
 
 module.exports = router;
